@@ -1,30 +1,22 @@
-// Var can be reassigned and overwritten
-var nameVar = 'Paul';
-nameVar = 'Mike';
-var nameVar = 'Joe';
+var nameVar = 'Andrew';
+var nameVar = 'Mike';
 console.log('nameVar', nameVar);
 
-// let can be reassigned but not overwritten
-let nameLet = 'Freddy';
-nameLet = 'Karyn';
+let nameLet = 'Jen';
+nameLet = 'Julie';
 console.log('nameLet', nameLet);
 
-// const cannot be reassigned or overwritten
 const nameConst = 'Frank';
 console.log('nameConst', nameConst);
 
-function getPetName() {
-    let petName = 'Winnie';
-    return petName;
-}
-
 // Block scoping
 
-var fullName = 'Paul Laird';
+const fullName = 'Jen Mead';
+let firstName;
 
 if (fullName) {
-    const firstName = fullName.split(' ')[0];
-    console.log(firstName);
+  firstName = fullName.split(' ')[0];
+  console.log(firstName);
 }
 
 console.log(firstName);

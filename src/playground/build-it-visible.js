@@ -1,29 +1,26 @@
-// Bash commands:
-// live-server public
-// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+let visibility = false;
 
-console.log("App.js is running!");
-
-const appRoot = document.getElementById("app");
-
-let visibleState = false;
-
-const changeVisibilityState = () => {
-    visibleState = !visibleState;
-    console.log(visibleState);
-    visibleToggleApp();
+const toggleVisibility = () => {
+  visibility = !visibility;
+  render();
 };
 
-const visibleToggleApp = () => {
-    const template = (
+const render = () => {
+  const jsx = (
+    <div>
+      <h1>Visibility Toggle</h1>
+      <button onClick={toggleVisibility}>
+        {visibility ? 'Hide details' : 'Show details'}
+      </button>
+      {visibility && (
         <div>
-            <h1>Visibility Toggle App</h1>
-            <button onClick={changeVisibilityState}>{visibleState == false ? "Show details" : "Hide details"}</button>
-            {visibleState && <p>Here are the details about the visibility application. They dissapear when you click the 'Hide details' button.</p>}
+          <p>Hey. These are some details you can now see!</p>
         </div>
-    );
+      )}
+    </div>
+  );
 
-    ReactDOM.render(template, appRoot);
+  ReactDOM.render(jsx, document.getElementById('app'));
 };
 
-visibleToggleApp();
+render();
