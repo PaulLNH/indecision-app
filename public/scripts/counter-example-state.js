@@ -25,7 +25,6 @@ var IndecisionApp = function (_React$Component) {
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
         _this.handlePick = _this.handlePick.bind(_this);
         _this.handleAddOption = _this.handleAddOption.bind(_this);
-        _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
         _this.state = {
             options: props.options
         };
@@ -33,53 +32,13 @@ var IndecisionApp = function (_React$Component) {
     }
 
     _createClass(IndecisionApp, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            try {
-                var json = localStorage.getItem('options');
-                var options = JSON.parse(json);
-
-                if (options) {
-                    this.setState(function () {
-                        return { options: options };
-                    });
-                }
-            } catch (e) {
-                // Do nothing at all
-            }
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-            if (prevState.options.length !== this.state.options.length) {
-                var json = JSON.stringify(this.state.options);
-                localStorage.setItem('options', json);
-                console.log('saving data');
-            }
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            console.log('componentWillUnmount');
-        }
-    }, {
         key: 'handleDeleteOptions',
         value: function handleDeleteOptions() {
             this.setState(function () {
-                return { options: [] };
-            });
-        }
-    }, {
-        key: 'handleDeleteOption',
-        value: function handleDeleteOption(optionToRemove) {
-            this.setState(function (prevState) {
                 return {
-                    options: prevState.options.filter(function (option) {
-                        return optionToRemove !== option;
-                    })
+                    options: []
                 };
             });
-            // localStorage.removeItem(JSON.stringify(optionToRemove));
         }
     }, {
         key: 'handlePick',
@@ -98,7 +57,9 @@ var IndecisionApp = function (_React$Component) {
             }
 
             this.setState(function (prevState) {
-                return { options: prevState.options.concat(option) };
+                return {
+                    options: prevState.options.concat(option)
+                };
             });
         }
     }, {
@@ -116,8 +77,7 @@ var IndecisionApp = function (_React$Component) {
                 }),
                 React.createElement(Options, {
                     options: this.state.options,
-                    handleDeleteOptions: this.handleDeleteOptions,
-                    handleDeleteOption: this.handleDeleteOption
+                    handleDeleteOptions: this.handleDeleteOptions
                 }),
                 React.createElement(AddListOption, { handleAddOption: this.handleAddOption })
             );
@@ -176,20 +136,11 @@ var Options = function Options(props) {
             { onClick: props.handleDeleteOptions },
             'Clear All'
         ),
-        props.options.length === 0 && React.createElement(
-            'p',
-            null,
-            'Please add an option to get started'
-        ),
         React.createElement(
             'ul',
             null,
             props.options.map(function (option) {
-                return React.createElement(Option, {
-                    key: option,
-                    optionText: option,
-                    handleDeleteOption: props.handleDeleteOption
-                });
+                return React.createElement(Option, { key: option, optionText: option });
             })
         )
     );
@@ -199,16 +150,7 @@ var Option = function Option(props) {
     return React.createElement(
         'li',
         null,
-        props.optionText,
-        React.createElement(
-            'button',
-            {
-                onClick: function onClick(e) {
-                    props.handleDeleteOption(props.optionText);
-                }
-            },
-            'remove'
-        )
+        props.optionText
     );
 };
 
@@ -239,9 +181,7 @@ var AddListOption = function (_React$Component2) {
                 return { error: error };
             });
 
-            if (!error) {
-                formEvent.target.elements.option.value = "";
-            }
+            formEvent.target.elements.option.value = "";
         }
     }, {
         key: 'render',
