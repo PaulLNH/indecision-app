@@ -2,6 +2,10 @@
 // live-server public
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
+// New Bash Commands:
+// yarn run serve
+// yarn run build
+
 // Stateless functional component (presentational components / dumb components)
 
 class IndecisionApp extends React.Component {
@@ -12,7 +16,7 @@ class IndecisionApp extends React.Component {
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleDeleteOption = this.handleDeleteOption.bind(this);
         this.state = {
-            options: props.options
+            options: []
         };
     }
 
@@ -89,10 +93,6 @@ class IndecisionApp extends React.Component {
         );
     }
 }
-
-IndecisionApp.defaultProps = {
-    options: []
-};
 
 const Header = (props) => {
     return (

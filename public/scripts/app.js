@@ -12,6 +12,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // live-server public
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
+// New Bash Commands:
+// yarn run serve
+// yarn run build
+
 // Stateless functional component (presentational components / dumb components)
 
 var IndecisionApp = function (_React$Component) {
@@ -27,7 +31,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
         _this.state = {
-            options: props.options
+            options: []
         };
         return _this;
     }
@@ -126,10 +130,6 @@ var IndecisionApp = function (_React$Component) {
 
     return IndecisionApp;
 }(React.Component);
-
-IndecisionApp.defaultProps = {
-    options: []
-};
 
 var Header = function Header(props) {
     return React.createElement(
