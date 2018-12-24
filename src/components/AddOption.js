@@ -11,7 +11,7 @@ export default class AddListOption extends React.Component {
 
     handleAddOption(formEvent) {
         formEvent.preventDefault();
-
+        // console.log(tesstt);
         const option = formEvent.target.elements.option.value.trim();
         const error = this.props.handleAddOption(option);
 
